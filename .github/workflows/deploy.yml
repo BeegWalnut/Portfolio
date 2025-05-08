@@ -31,7 +31,7 @@ jobs:
       working-directory: ./Portfolio
   
     - name: Publish Blazor
-      run: dotnet publish Portfolio.csproj -c Release -o build
+      run: dotnet publish ./Portfolio/Portfolio.csproj -c Release -o build
 
     # 2. (Optional) Fix <base href="/"> to "/portfolio/"
     - name: Rewrite base href for GitHub Pages
