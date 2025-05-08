@@ -1,0 +1,48 @@
+name: Build and deploy Blazor to GitHub Pages
+
+on:
+  # trigger on every push to main; add pull_request if you like
+  push:
+    branches: [main]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    # 1. Build the Blazor WASM app
+    - uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    # Optional Tailwind (skip if you don't need Node)
+    - name: Install Node & Tailwind deps
+      uses: actions/setup-node@v4
+      with: { node-version: '20' }
+    - run: |
+        npm ci
+        npm run build:css   # generates wwwroot/css/site.css
+
+    - name: Publish Blazor
+      run: dotnet publish Portfolio.csproj -c Release -o build
+
+    # 2. (Optional) Fix <base href="/"> to "/portfolio/"
+    - name: Rewrite base href for GitHub Pages
+      run: |
+        sed -i 's@<base href="/" />@<base href="/portfolio/" />@' build/wwwroot/index.html
+
+    # 3. Add .nojekyll and deploy to gh-pages
+    - name: Copy site files
+      run: |
+        mkdir output
+        cp -r build/wwwroot/* output/
+        touch output/.nojekyll
+
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./output          # ← what we just filled
+        # keep_history: false          # optional: force-push instead of commit-per-deploy
