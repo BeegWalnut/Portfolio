@@ -1,0 +1,29 @@
+﻿@page "/projects"
+<section class="container mx-auto py-16">
+    <h2 class="text-3xl font-bold mb-8">Featured Projects</h2>
+    <div class="grid md:grid-cols-2 gap-8">
+        @foreach (var p in ProjectCard)
+        {
+            <div class="rounded-2xl shadow p-6 bg-white flex flex-col gap-4">
+                <h3 class="text-xl font-semibold">@p.Title</h3>
+                <p class="text-gray-600 flex-1">@p.Description</p>
+                <div class="flex gap-3 text-sm">
+                    <a class="text-sky-600 hover:underline" href="@p.Repo">Code</a>
+                    <a class="text-sky-600 hover:underline" href="@p.Demo">Live</a>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+@code {
+    record Project(string Title, string Description, string Repo, string Demo);
+
+    List<Project> ProjectCard = new()
+    {
+        new("Financial Tracker", "Blazor + SQL Server app with charts, login and admin chat.",
+            "https://github.com/you/financial-tracker", "https://financialtracker.example.com"),
+        new("Redmine Dashboard", "Blazor WASM client calling Redmine API to visualize time logs.",
+            "https://github.com/you/redmine-dashboard", "https://redminedash.example.com")
+    };
+}
