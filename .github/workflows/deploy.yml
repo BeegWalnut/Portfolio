@@ -15,16 +15,21 @@ jobs:
     # 1. Build the Blazor WASM app
     - uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '8.0.x'
+        dotnet-version: '9.0.x'
 
     # Optional Tailwind (skip if you don't need Node)
     - name: Install Node & Tailwind deps
       uses: actions/setup-node@v4
       with: { node-version: '20' }
-    - run: |
-        npm ci
-        npm run build:css   # generates wwwroot/css/site.css
-
+      
+    - name: Install NPM deps
+      run: npm ci
+      working-directory: ./Portfolio
+      
+    - name: Build Tailwind
+      run: npm run build:css
+      working-directory: ./Portfolio
+  
     - name: Publish Blazor
       run: dotnet publish Portfolio.csproj -c Release -o build
 
