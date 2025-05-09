@@ -1,10 +1,28 @@
 ﻿@page "/"
-<section class="container mx-auto py-24 flex flex-col items-center text-center gap-6">
-    <h1 class="text-4xl md:text-6xl font-extrabold">Hello, I'm Your Name</h1>
-    <p class="max-w-xl text-lg md:text-xl text-gray-600">
-        .NET / Blazor developer who enjoys building robust web applications.
-    </p>
-    <a href="/projects" class="px-6 py-3 rounded-xl bg-sky-600 text-white shadow hover:bg-sky-700 transition">
-        See my work
-    </a>
+<section id="landing" class="bg-space min-h-screen flex items-center justify-center overflow-hidden">
+
+    <!-- 3-D canvas -->
+    <div id="hero-canvas" class="absolute inset-0"></div>
+
+    <!-- Overlayed hero text -->
+    <div class="text-center text-white px-6">
+        <h1 class="hero-text text-5xl md:text-7xl font-extrabold mb-6 drop-shadow-lg">
+            Hello, I'm <span class="text-sky-400">Walnut</span>
+        </h1>
+        <br/>
+        <p class="hero-text max-w-xl text-lg md:text-2xl mb-10 font-bold opacity-95">
+            .NET / Blazor developer who enjoys building robust web applications.
+        </p>
+        @* <a href="#projects"
+           class="px-8 py-3 bg-sky-500 hover:bg-sky-600 rounded-xl font-semibold shadow-lg transition opacity-95">
+            See my work
+        </a> *@
+    </div>
 </section>
+
+
+
+<Projects />
+<Skills />
+<About />
+<Contact />

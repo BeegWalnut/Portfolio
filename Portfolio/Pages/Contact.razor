@@ -1,8 +1,7 @@
-﻿@page "/contact"
-@using System.ComponentModel.DataAnnotations;
+﻿@using System.ComponentModel.DataAnnotations;
 @inject NavigationManager Navigation
 
-<section class="container mx-auto py-16">
+<section id="contact" class="container mx-auto py-16">
     <h2 class="text-3xl font-bold mb-8">Contact</h2>
 
     <EditForm Model="@message" OnValidSubmit="Send">

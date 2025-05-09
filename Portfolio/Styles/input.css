@@ -1,3 +1,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ---------- Global tweaks ---------- */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ---------- Star field hero background ---------- */
+.hero-bg {
+    @apply bg-center bg-cover relative isolate;
+    background-image: url('https://apod.nasa.gov/apod/image/2011/StartrailsStavrosKallipolitisAPOD1024.jpg');
+}
+    /* dark overlay so white text pops */
+    .hero-bg::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgb(0 0 0 / 0.55);
+        z-index: -1;
+    }
+
+#hero-canvas canvas {
+    /* ensures canvas obeys .absolute inset-0 from wrapper */
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Cosmic radial gradient – centre lighter, edges darker  */
+.bg-space {
+    background: radial-gradient(circle at center, hsl(235 45% 30%) 0%, hsl(235 50% 18%) 60%, hsl(235 55% 10%) 100%);
+}
+
+.hero-text {
+    text-shadow: 0 2px 4px rgba(0,0,0,0.6), 0 4px 8px rgba(0,0,0,0.4);
+}
