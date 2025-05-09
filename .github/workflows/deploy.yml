@@ -36,7 +36,7 @@ jobs:
     # 2. (Optional) Fix <base href="/"> to "/portfolio/"
     - name: Rewrite base href for GitHub Pages
       run: |
-        sed -i 's@<base href="/" />@<base href="/portfolio/" />@' build/wwwroot/index.html
+        sed -i 's@<base href="/" />@<base href="/Portfolio/" />@' build/wwwroot/index.html
 
     # 3. Add .nojekyll and deploy to gh-pages
     - name: Copy site files
